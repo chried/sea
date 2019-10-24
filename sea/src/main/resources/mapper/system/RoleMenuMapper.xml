@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chried.sea.system.mapper.RoleMenuMapper">
+    <!--根据角色id获取权限-->
+    <select id="queryByRoleId" parameterType="String"
+            resultType="com.chried.sea.system.model.entity.MenuEntity">
+        select distinct m.id, m.name,m.code,m.parent_id,m.url,m.icon from menu m,role_menu r where m.id = r.menu_id and r.role_id = #{roleId}
+    </select>
+    <!--根据角色ids获取权限-->
+    <select id="queryByRoleIds" parameterType="java.util.Collection"
+            resultType="com.chried.sea.system.model.entity.MenuEntity">
+        select distinct m.id, m.name,m.code,m.parent_id,m.url,m.icon from menu m,role_menu r where m.id = r.menu_id and
+        r.role_id
+        in
+        <foreach collection="roleIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

@@ -1,0 +1,29 @@
+package com.chried.sea.security.handle;
+
+import com.alibaba.fastjson.JSON;
+import com.chried.core.enums.EnumResult;
+import com.chried.core.param.Result;
+import com.chried.utils.ResultUtil;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * 权限验证失败.
+ *
+ * @author chried
+ */
+@Component
+public class AjaxAccessDeniedHandler implements AccessDeniedHandler {
+
+    @Override
+    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
+
+        ResultUtil.out(httpServletResponse, ResultUtil.resultMap(EnumResult.Unauthorized));
+    }
+}

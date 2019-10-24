@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chried.sea.system.mapper.MessageMapper">
+    <!--根据用户查询消息-->
+    <select id="queryByUserId" parameterType="java.util.Map"
+            resultType="com.chried.sea.system.model.entity.MessageEntity">
+        select m.id,m.type,m.title,m.content,m.read,m.role_id,m.create_date,m.read_date from message m,user_role u where
+        m.role_id = u.role_id and u.user_id = #{userId}
+        <if test="read!=null">
+            m.read = #{read}
+        </if>
+        order by m.create_date desc
+    </select>
+</mapper>

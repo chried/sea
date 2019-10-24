@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chried.sea.system.mapper.UserRoleMapper">
+    <!--根据用户ID查询角色-->
+    <select id="selectRoleByUserId" parameterType="String" resultType="com.chried.sea.system.model.entity.RoleEntity">
+        select distinct r.id,r.name,r.sign from role r, user_role u where r.id = u.role_id and u.user_id = #{userId}
+    </select>
+</mapper>
